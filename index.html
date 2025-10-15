@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Tronco</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #6c5b7b, #355c7d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 800px;
+            box-shadow: 0 0 50px rgba(255, 107, 157, 0.5);
+        }
+        
+        h1 {
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .mensaje {
+            font-size: 1.3em;
+            line-height: 1.8;
+            text-align: left;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .destacado {
+            color: #ff6b9d;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .firma {
+            margin-top: 40px;
+            font-size: 1.5em;
+            font-style: italic;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            animation: fall 3s linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 FELIZ CUMPLEAÑOS AUGUSTO "TRONCO" 🎉</h1>
+        
+        <div class="mensaje">
+            <p>Querido <span class="destacado">Augusto "Ponla"</span>,</p>
+            
+            <p>Tu puto cumpleaños es tan irrelevante que ni siquiera merece su propio día del calendario, carajo. Es tan insignificante que tenemos que celebrarlo usando los acontecimientos de <strong>MAÑANA</strong>, porque hoy no pasa nada digno de recordar... igual que tu existencia, maricón.</p>
+            
+            <p>Resulta que mañana es el <span class="destacado">Día Internacional de las Mujeres Rurales</span>. ¿Y sabes qué? Eso me recordó a tu amorcito, el Gragas Rural ese que tanto te gusta. Seguro ese gordo peludo te tiene enamorado, ¿no? Se nota que te mueres por ese campesino borracho. Eres más obvio que un semáforo en rojo, compadre.</p>
+            
+            <p>También mañana es el <span class="destacado">Día Internacional de los Pronombres</span>. ¿Cuáles son los tuyos este año, Tronco? ¿Ella/Ella? Porque con esa actitud que cargas, ya todos sospechamos lo mariconcito que andas. No es por joder, pero hasta un ciego se daría cuenta.</p>
+            
+            <p>Y para rematar, mañana también se celebra el <span class="destacado">Día Internacional de la Reconstrucción Mamaria</span>. Che, ¿ya te hiciste las tetas que tanto querías? Con lo maraco que eres, no me sorprendería que ya tuvieras turno programado. "Ponla" más bien debería ser "Póntelas", ¿no?</p>
+            
+            <p>En fin, Augusto, feliz cumpleaños, pedazo de maricón. Que este año te traiga mucha felicidad, mucho Gragas Rural en tu vida, y ojalá encuentres los huevos que perdiste por ahí hace tiempo.</p>
+        </div>
+        
+        <div class="firma">
+            <p>Con cariño (pero siendo honestos),</p>
+            <p>Tus amigos que te quieren... más o menos 😘</p>
+        </div>
+    </div>
+    
+    <script>
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            confetti.style.background = ['#ff6b9d', '#c06c84', '#6c5b7b', '#355c7d', '#ffd700'][Math.floor(Math.random() * 5)];
+            document.body.appendChild(confetti);
+        }
+    </script>
+</body>
+</html>
