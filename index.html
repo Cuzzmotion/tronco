@@ -8,8 +8,33 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* =============================================
+     🦈 IMAGEN DE FONDO — CAMBIÁ ESTA URL:
+     Reemplazá el texto entre comillas por el link
+     directo a tu imagen (termina en .jpg, .png, etc)
+     Ejemplo: 'url("https://i.imgur.com/TuImagen.jpg")'
+     ============================================= */
+  :root {
+    --bg-image: url("https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fwallpapercave.com%2Fwp%2FLobxGUl.jpg&sp=1772760947T24e56f336b917381a83df96bb0eead5d5b82f52a4e16b41891d30b9d5edc913d");
+    /* 👆 ¡CAMBIÁ ESA URL POR LA TUYA! */
+
+    --shark-blue:   #003f6b;
+    --deep-blue:    #001a2e;
+    --ocean-mid:    #005f9e;
+    --foam-cyan:    #00d4ff;
+    --danger-red:   #ff2200;
+    --bite-orange:  #ff6b00;
+    --blood-accent: #cc1100;
+    --teeth-white:  #e8f4ff;
+    --gold:         #ffd700;
+  }
+
   body {
-    background: #0a0a0a;
+    background-color: var(--deep-blue);
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -19,177 +44,250 @@
     padding: 20px;
   }
 
-  /* Animated bg */
+  /* Deep ocean overlay */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: 
-      radial-gradient(ellipse at 20% 50%, rgba(255,50,50,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(255,200,0,0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 60% 80%, rgba(100,50,255,0.07) 0%, transparent 50%);
+    background:
+      linear-gradient(180deg,
+        rgba(0,10,25,0.75) 0%,
+        rgba(0,30,60,0.65) 40%,
+        rgba(0,15,35,0.80) 100%),
+      radial-gradient(ellipse at 30% 60%, rgba(0,80,160,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(255,34,0,0.08) 0%, transparent 50%);
     z-index: 0;
-    animation: bgPulse 6s ease-in-out infinite alternate;
+    animation: bgPulse 7s ease-in-out infinite alternate;
   }
 
   @keyframes bgPulse {
-    from { opacity: 0.6; }
-    to { opacity: 1; }
+    from { opacity: 0.85; }
+    to   { opacity: 1; }
   }
 
+  /* Bubbles */
+  .bubbles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .bubble {
+    position: absolute;
+    bottom: -40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,212,255,0.4);
+    background: rgba(0,212,255,0.06);
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0%   { bottom: -40px; opacity: 0; transform: translateX(0) scale(1); }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { bottom: 110vh; opacity: 0; transform: translateX(30px) scale(1.1); }
+  }
+
+  /* ---- Card ---- */
   .card {
     position: relative;
     z-index: 1;
-    max-width: 720px;
+    max-width: 740px;
     width: 100%;
-    background: #111;
-    border: 3px solid #ff3300;
-    border-radius: 4px;
+    background: rgba(0, 10, 25, 0.82);
+    border: 2px solid rgba(0,212,255,0.35);
+    border-radius: 6px;
     padding: 48px 40px;
-    box-shadow: 
-      0 0 40px rgba(255,51,0,0.3),
-      0 0 80px rgba(255,51,0,0.1),
-      inset 0 0 60px rgba(0,0,0,0.5);
-    animation: cardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    box-shadow:
+      0 0 0 1px rgba(0,212,255,0.1),
+      0 0 50px rgba(0,100,200,0.25),
+      0 0 120px rgba(0,50,120,0.2),
+      inset 0 0 80px rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    animation: cardIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
   @keyframes cardIn {
-    from { opacity: 0; transform: scale(0.8) rotate(-3deg); }
-    to { opacity: 1; transform: scale(1) rotate(0deg); }
+    from { opacity: 0; transform: scale(0.8) translateY(40px); }
+    to   { opacity: 1; transform: scale(1)   translateY(0); }
   }
 
-  /* Decorative corner sparks */
-  .card::before, .card::after {
-    content: '🎂';
+  /* Shark fin corners */
+  .card::before {
+    content: '🦈';
     position: absolute;
     font-size: 2rem;
-    animation: spin 4s linear infinite;
+    top: -22px;
+    left: 16px;
+    animation: finBob 2.5s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px rgba(0,212,255,0.6));
   }
-  .card::before { top: -20px; left: -20px; }
-  .card::after { bottom: -20px; right: -20px; animation-direction: reverse; }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  .card::after {
+    content: '🦈';
+    position: absolute;
+    font-size: 2rem;
+    bottom: -22px;
+    right: 16px;
+    transform: scaleX(-1);
+    animation: finBob 2.5s ease-in-out infinite alternate-reverse;
+    filter: drop-shadow(0 0 8px rgba(0,212,255,0.6));
   }
+  @keyframes finBob {
+    from { transform: translateY(0) scaleX(1); }
+    to   { transform: translateY(-6px) scaleX(1); }
+  }
+  .card::after { transform: scaleX(-1); }
 
-  .header {
-    text-align: center;
-    margin-bottom: 32px;
+  /* ---- Header ---- */
+  .header { text-align: center; margin-bottom: 32px; }
+
+  .shark-banner {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    letter-spacing: 6px;
+    color: var(--foam-cyan);
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 10px;
+    animation: glitch 4s infinite;
+  }
+  @keyframes glitch {
+    0%,95%,100% { text-shadow: none; transform: none; }
+    96% { text-shadow: 2px 0 var(--danger-red), -2px 0 var(--foam-cyan); transform: skew(-1deg); }
+    98% { text-shadow: -2px 0 var(--danger-red), 2px 0 var(--foam-cyan); transform: skew(1deg); }
   }
 
   .title {
     font-family: 'Bangers', cursive;
-    font-size: clamp(2.8rem, 8vw, 5rem);
-    color: #ff3300;
-    letter-spacing: 4px;
-    text-shadow: 
-      3px 3px 0 #8b0000,
-      6px 6px 0 rgba(255,51,0,0.2);
+    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    color: var(--danger-red);
+    letter-spacing: 5px;
+    text-shadow:
+      0 0 20px rgba(255,34,0,0.6),
+      3px 3px 0 #5a0000,
+      6px 6px 0 rgba(255,34,0,0.15);
     line-height: 1;
-    animation: wobble 3s ease-in-out infinite;
+    animation: wobble 3.5s ease-in-out infinite;
   }
-
   @keyframes wobble {
-    0%, 100% { transform: rotate(-1deg); }
-    50% { transform: rotate(1deg); }
+    0%,100% { transform: rotate(-1.5deg); }
+    50%      { transform: rotate(1.5deg); }
   }
 
   .subtitle {
     font-family: 'Permanent Marker', cursive;
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    color: #ffd700;
-    margin-top: 8px;
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    color: var(--gold);
+    margin-top: 10px;
     opacity: 0.9;
+    text-shadow: 0 0 12px rgba(255,215,0,0.4);
   }
 
+  /* ---- Divider ---- */
   .divider {
     border: none;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #ff3300, transparent);
-    margin: 24px 0;
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent, var(--foam-cyan), rgba(255,34,0,0.6), var(--foam-cyan), transparent);
+    margin: 26px 0;
+    opacity: 0.5;
   }
 
+  /* ---- Sections ---- */
   .section {
-    margin-bottom: 28px;
-    padding: 18px 20px;
-    border-left: 4px solid #ff3300;
-    background: rgba(255,51,0,0.05);
-    border-radius: 0 4px 4px 0;
+    margin-bottom: 22px;
+    padding: 18px 22px;
+    border-left: 4px solid var(--foam-cyan);
+    background: rgba(0,30,60,0.4);
+    border-radius: 0 6px 6px 0;
     animation: fadeSlide 0.6s ease both;
+    backdrop-filter: blur(2px);
   }
 
-  .section:nth-child(2) { animation-delay: 0.1s; border-color: #ffd700; background: rgba(255,215,0,0.05); }
-  .section:nth-child(3) { animation-delay: 0.2s; border-color: #7b4fff; background: rgba(123,79,255,0.05); }
-  .section:nth-child(4) { animation-delay: 0.3s; border-color: #00cfff; background: rgba(0,207,255,0.05); }
-  .section:nth-child(5) { animation-delay: 0.4s; border-color: #ff69b4; background: rgba(255,105,180,0.05); }
+  .section:nth-child(1) { border-color: var(--danger-red);  background: rgba(80,0,0,0.2);   animation-delay: 0.05s; }
+  .section:nth-child(2) { border-color: var(--foam-cyan);   background: rgba(0,40,70,0.35);  animation-delay: 0.15s; }
+  .section:nth-child(3) { border-color: var(--bite-orange); background: rgba(60,20,0,0.25);  animation-delay: 0.25s; }
+  .section:nth-child(4) { border-color: var(--ocean-mid);   background: rgba(0,50,100,0.3);  animation-delay: 0.35s; }
+  .section:nth-child(5) { border-color: #7b4fff;            background: rgba(40,0,90,0.25);  animation-delay: 0.45s; }
 
   @keyframes fadeSlide {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
 
   .section-icon {
     font-size: 1.8rem;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 0 6px rgba(0,212,255,0.5));
   }
 
   .section-tag {
     font-family: 'Bangers', cursive;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 3px;
-    color: #ff3300;
     text-transform: uppercase;
-    opacity: 0.7;
+    opacity: 0.75;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
-
-  .section:nth-child(2) .section-tag { color: #ffd700; }
-  .section:nth-child(3) .section-tag { color: #7b4fff; }
-  .section:nth-child(4) .section-tag { color: #00cfff; }
-  .section:nth-child(5) .section-tag { color: #ff69b4; }
+  .section:nth-child(1) .section-tag { color: var(--danger-red); }
+  .section:nth-child(2) .section-tag { color: var(--foam-cyan); }
+  .section:nth-child(3) .section-tag { color: var(--bite-orange); }
+  .section:nth-child(4) .section-tag { color: #66aaff; }
+  .section:nth-child(5) .section-tag { color: #b57bff; }
 
   .section p {
-    color: #e0e0e0;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    line-height: 1.6;
+    color: var(--teeth-white);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.65;
   }
 
-  .highlight {
-    color: #ffd700;
-    font-weight: 700;
-  }
+  /* Color helpers */
+  .hl   { color: var(--gold);        font-weight: 700; }
+  .red  { color: var(--danger-red);  font-weight: 700; text-shadow: 0 0 8px rgba(255,34,0,0.4); }
+  .cyan { color: var(--foam-cyan);   font-weight: 700; }
+  .org  { color: var(--bite-orange); font-weight: 700; }
+  .pur  { color: #b57bff;            font-weight: 700; }
+  .blu  { color: #66aaff;            font-weight: 700; }
 
-  .red { color: #ff3300; font-weight: 700; }
-  .purple { color: #b57bff; font-weight: 700; }
-  .blue { color: #00cfff; font-weight: 700; }
-  .pink { color: #ff69b4; font-weight: 700; }
-
-  .footer {
+  /* ---- Wolf / Shark sound ---- */
+  .wolf-sound {
     text-align: center;
-    margin-top: 32px;
+    font-size: clamp(1.6rem, 5vw, 2.3rem);
+    letter-spacing: 3px;
+    margin: 12px 0;
+    font-family: 'Bangers', cursive;
+    color: var(--foam-cyan);
+    animation: roar 1.8s ease-in-out infinite alternate;
   }
+  @keyframes roar {
+    from { transform: scale(1);   text-shadow: 0 0 10px rgba(0,212,255,0.3); }
+    to   { transform: scale(1.08); text-shadow: 0 0 30px rgba(0,212,255,0.9); }
+  }
+
+  /* ---- Footer ---- */
+  .footer { text-align: center; margin-top: 32px; }
 
   .big-msg {
     font-family: 'Permanent Marker', cursive;
     font-size: clamp(1.3rem, 4vw, 2rem);
-    color: #fff;
-    line-height: 1.5;
+    color: var(--teeth-white);
+    line-height: 1.55;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
   }
-
   .big-msg span {
-    color: #ff3300;
+    color: var(--danger-red);
     display: inline-block;
-    animation: bounce 0.6s ease infinite alternate;
+    animation: bounce 0.7s ease infinite alternate;
+    text-shadow: 0 0 14px rgba(255,34,0,0.5);
   }
-
   @keyframes bounce {
     from { transform: translateY(0); }
-    to { transform: translateY(-6px); }
+    to   { transform: translateY(-7px); }
   }
 
+  /* ---- Confetti (shark-colored) ---- */
   .confetti {
     position: fixed;
     inset: 0;
@@ -197,45 +295,32 @@
     z-index: 999;
     overflow: hidden;
   }
-
   .confetti-piece {
     position: absolute;
-    width: 10px;
-    height: 10px;
     top: -20px;
     border-radius: 2px;
     animation: fall linear infinite;
   }
-
   @keyframes fall {
-    0% { top: -20px; transform: rotate(0deg) translateX(0); opacity: 1; }
-    80% { opacity: 1; }
-    100% { top: 110vh; transform: rotate(720deg) translateX(80px); opacity: 0; }
+    0%   { top: -20px; transform: rotate(0deg)   translateX(0);   opacity: 1; }
+    80%  { opacity: 1; }
+    100% { top: 110vh; transform: rotate(720deg) translateX(60px); opacity: 0; }
   }
 
-  .wolf-sound {
-    text-align: center;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    letter-spacing: 2px;
-    margin: 8px 0;
-    animation: roar 1.5s ease-in-out infinite alternate;
-    color: #ff69b4;
-    font-family: 'Bangers', cursive;
-  }
-
-  @keyframes roar {
-    from { transform: scale(1); text-shadow: 0 0 10px rgba(255,105,180,0.3); }
-    to { transform: scale(1.1); text-shadow: 0 0 25px rgba(255,105,180,0.8); }
+  /* Responsive */
+  @media (max-width: 500px) {
+    .card { padding: 36px 20px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Confetti -->
+<div class="bubbles" id="bubbles"></div>
 <div class="confetti" id="confetti"></div>
 
 <div class="card">
   <div class="header">
+    <div class="shark-banner">🦈 Peligro en el Océano — Zona Restringida 🦈</div>
     <div class="title">¡FELIZ CUMPLE,<br>CAGÓN!</div>
     <div class="subtitle">aka "Jimmy" Tornazo 🎉</div>
   </div>
@@ -244,63 +329,67 @@
 
   <!-- Intro -->
   <div class="section">
-    <span class="section-tag">📢 Aviso importante</span>
+    <span class="section-tag">📢 Aviso Importante de Guardia Costera</span>
     <p>
-      Mirá, <span class="highlight">Jimmy</span>, tu cumpleaños es tan <span class="red">irrelevante</span> que el mundo entero decidió celebrar otras cosas el mismo día. 
-      Así que no, <span class="highlight">la mierda</span> no se detuvo por vos. Pero igual acá estamos, porque somos buenos amigos y te queremos, <span class="red">pedazo de pelotudo</span>.
+      Mirá, <span class="hl">Jimmy</span>, tu cumpleaños es tan <span class="red">irrelevante</span> que el mundo entero decidió celebrar otras cosas el mismo día.
+      Así que no, <span class="hl">la mierda</span> no se detuvo por vos. Pero igual acá estamos, porque somos buenos amigos y te queremos,
+      <span class="red">pedazo de pelotudo</span>. Incluso los tiburones nadan en círculos antes de atacar. Vos simplemente andás en círculos. 🦈
     </p>
   </div>
 
-  <!-- Día del escultor -->
+  <!-- Escultor -->
   <div class="section">
     <span class="section-icon">🗿</span>
     <span class="section-tag">Día Internacional del Escultor</span>
     <p>
-      Hoy se celebra el <span class="highlight">Día Internacional del Escultor</span>. Los escultores toman una piedra sin forma, sin gracia y sin valor... 
-      y la convierten en algo <span class="highlight">hermoso e importante</span>. 
-      Lástima que con vos <span class="red">nadie se tomó ese trabajo</span>, <span class="highlight">Jimmy</span>. Seguís siendo la piedra sin pulir. 
-      <span class="red">Bruto, tosco y lleno de aristas</span>. Feliz cumple igual, boludo. 🗿
+      Hoy se celebra el <span class="hl">Día Internacional del Escultor</span>. Los escultores toman una piedra sin forma, sin gracia y sin valor…
+      y la convierten en algo <span class="hl">hermoso e importante</span>.
+      Lástima que con vos <span class="red">nadie se tomó ese trabajo</span>, <span class="hl">Jimmy</span>.
+      Seguís siendo la <span class="cyan">roca del fondo del océano</span> — fría, oscura y cubierta de algas. 🗿
+      Los tiburones ni te miran cuando pasan.
     </p>
   </div>
 
-  <!-- Día del linfedema -->
+  <!-- Linfedema -->
   <div class="section">
     <span class="section-icon">🏥</span>
     <span class="section-tag">Día Internacional del Linfedema</span>
     <p>
-      También es el <span class="purple">Día Internacional del Linfedema</span>, que es básicamente cuando el cuerpo <span class="purple">se hincha de manera patológica</span> y no funciona como debería. 
-      Curiosamente, eso describe perfectamente tu <span class="red">cerebro, Jimmy</span>. 
-      Hinchado, inútil y médicamente inexplicable. <span class="purple">Consultá a un especialista</span>, en serio. 💊
+      También es el <span class="org">Día Internacional del Linfedema</span> — cuando el cuerpo <span class="org">se hincha de manera patológica</span>.
+      Curiosamente, eso describe perfectamente tu cerebro, <span class="red">Jimmy</span>: hinchado, inútil y médicamente inexplicable.
+      De hecho, los <span class="cyan">tiburones tienen cerebros más eficientes</span> y llevan 450 millones de años en el planeta sin necesitar Google Maps.
+      Vos te perdés yendo a la esquina. 💊
     </p>
   </div>
 
-  <!-- Semana contra el racismo -->
+  <!-- Racismo -->
   <div class="section">
     <span class="section-icon">✊</span>
     <span class="section-tag">Semana de Solidaridad contra el Racismo</span>
     <p>
-      Estamos en plena <span class="blue">Semana de Solidaridad con los Pueblos que Luchan contra el Racismo y la Discriminación Racial</span>. 
-      Un mensaje hermoso de igualdad para toda la humanidad... 
-      <span class="red">excepto para vos</span>, <span class="highlight">Jimmy</span>, porque vos sos discriminado por una razón completamente diferente: 
-      <span class="blue">sos un boludo</span> y eso no tiene nada que ver con tu origen. Es mérito propio. Felicitaciones. ✊
+      Estamos en la <span class="blu">Semana de Solidaridad con los Pueblos que Luchan contra el Racismo y la Discriminación Racial</span>.
+      Un mensaje hermoso de igualdad… <span class="red">excepto para vos</span>, <span class="hl">Jimmy</span>, porque tu discriminación no tiene que ver con el origen:
+      es <span class="blu">mérito propio</span>. Hasta los tiburones, que son animales sin prejuicios, te morderían <span class="cyan">dos veces</span>.
+      Así de especial sos. ✊🦈
     </p>
   </div>
 
-  <!-- Therian Warwick -->
+  <!-- Warwick Therian -->
   <div class="section">
-    <span class="section-icon">🐺</span>
-    <span class="section-tag">Therian Alert — Warwick Mode: ON</span>
+    <span class="section-icon">🐺🦈</span>
+    <span class="section-tag">Therian Alert — Warwick x Tiburón Crossover Mode: ON</span>
     <p>
-      Y para cerrar con broche de oro: sabemos que en el fondo <span class="pink">Jimmy no es del todo humano</span>. 
-      Cada vez que abre el League of Legends y lockea a <span class="highlight">Warwick</span>, algo se despierta en él. 
-      Los <span class="pink">aullidos</span>, los gruñidos guturales, los <span class="red">sonidos de bestia herida</span> que salen de su habitación... 
-      <span class="pink">el therian interior hace su aparición</span>. 
-      Vecinos han llamado al control de fauna. Su familia pensó que tenían un <span class="red">perro con rabia</span>. 
-      No, señores. Era Jimmy en la jungla, husmeando al ADC enemigo. <span class="highlight">🐺 AWOOOOOO 🐺</span>
+      Y acá el gran secreto: <span class="pur">Jimmy no es del todo humano</span>.
+      Cuando lockea a <span class="hl">Warwick</span>, algo primitivo despierta.
+      Los científicos ahora creen que su ADN es un cruce entre <span class="cyan">tiburón blanco</span> y <span class="pur">lobizón</span>:
+      <span class="red">aúlla bajo el agua y muerde en tierra</span>.
+      Vecinos han llamado a la guardia costera. Su familia pensó que tenían un perro con rabia.
+      No, señores. Era Jimmy en la jungla-océano, husmeando al ADC enemigo con el <span class="cyan">sonar de un gran blanco</span>.
+      <span class="hl">🦈🐺 AWOOOOOO 🐺🦈</span>
     </p>
   </div>
 
-  <div class="wolf-sound">🐺 AWOOOOOO — HAPPY BIRTHDAY, MUTANTE 🐺</div>
+  <div class="wolf-sound">🦈 AWOOOOOO — HAPPY BIRTHDAY, MUTANTE ACUÁTICO 🦈</div>
 
   <hr class="divider">
 
@@ -308,27 +397,41 @@
     <div class="big-msg">
       En serio, <span>Jimmy</span>:<br>
       te queremos un montón,<br>
-      <span>¡feliz cumpleaños, cabrón!</span> 🎂🍺
+      <span>¡feliz cumpleaños, cabrón!</span> 🦈🍺
     </div>
   </div>
 </div>
 
 <script>
-  // Generate confetti
-  const container = document.getElementById('confetti');
-  const colors = ['#ff3300','#ffd700','#7b4fff','#00cfff','#ff69b4','#fff'];
-  for (let i = 0; i < 60; i++) {
-    const piece = document.createElement('div');
-    piece.classList.add('confetti-piece');
-    piece.style.left = Math.random() * 100 + 'vw';
-    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.width = (Math.random() * 8 + 6) + 'px';
-    piece.style.height = (Math.random() * 8 + 6) + 'px';
-    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-    piece.style.animationDuration = (Math.random() * 4 + 3) + 's';
-    piece.style.animationDelay = (Math.random() * 5) + 's';
-    piece.style.opacity = Math.random() * 0.7 + 0.3;
-    container.appendChild(piece);
+  /* --- Bubbles --- */
+  const bubbleContainer = document.getElementById('bubbles');
+  for (let i = 0; i < 28; i++) {
+    const b = document.createElement('div');
+    b.classList.add('bubble');
+    const size = Math.random() * 20 + 8;
+    b.style.width  = size + 'px';
+    b.style.height = size + 'px';
+    b.style.left   = Math.random() * 100 + 'vw';
+    b.style.animationDuration  = (Math.random() * 8 + 6) + 's';
+    b.style.animationDelay     = (Math.random() * 8) + 's';
+    bubbleContainer.appendChild(b);
+  }
+
+  /* --- Confetti (ocean palette) --- */
+  const confettiContainer = document.getElementById('confetti');
+  const colors = ['#00d4ff','#003f6b','#ff2200','#ff6b00','#ffd700','#66aaff','#ffffff'];
+  for (let i = 0; i < 55; i++) {
+    const p = document.createElement('div');
+    p.classList.add('confetti-piece');
+    p.style.left             = Math.random() * 100 + 'vw';
+    p.style.background       = colors[Math.floor(Math.random() * colors.length)];
+    p.style.width            = (Math.random() * 8 + 5) + 'px';
+    p.style.height           = (Math.random() * 8 + 5) + 'px';
+    p.style.borderRadius     = Math.random() > 0.5 ? '50%' : '2px';
+    p.style.animationDuration = (Math.random() * 5 + 4) + 's';
+    p.style.animationDelay   = (Math.random() * 6) + 's';
+    p.style.opacity          = Math.random() * 0.6 + 0.3;
+    confettiContainer.appendChild(p);
   }
 </script>
 </body>
