@@ -1,120 +1,335 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños Tronco</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(45deg, #ff6b9d, #c06c84, #6c5b7b, #355c7d);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: white;
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 800px;
-            box-shadow: 0 0 50px rgba(255, 107, 157, 0.5);
-        }
-        
-        h1 {
-            font-size: 3em;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            margin-bottom: 30px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .mensaje {
-            font-size: 1.3em;
-            line-height: 1.8;
-            text-align: left;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-        
-        .destacado {
-            color: #ff6b9d;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        
-        .firma {
-            margin-top: 40px;
-            font-size: 1.5em;
-            font-style: italic;
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #ff6b9d;
-            animation: fall 3s linear infinite;
-        }
-        
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumple Jimmy</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bangers:wght@400&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Caveat', cursive;
+    overflow-x: hidden;
+    padding: 20px;
+  }
+
+  /* Animated bg */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(255,50,50,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(255,200,0,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(100,50,255,0.07) 0%, transparent 50%);
+    z-index: 0;
+    animation: bgPulse 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes bgPulse {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    width: 100%;
+    background: #111;
+    border: 3px solid #ff3300;
+    border-radius: 4px;
+    padding: 48px 40px;
+    box-shadow: 
+      0 0 40px rgba(255,51,0,0.3),
+      0 0 80px rgba(255,51,0,0.1),
+      inset 0 0 60px rgba(0,0,0,0.5);
+    animation: cardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: scale(0.8) rotate(-3deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  /* Decorative corner sparks */
+  .card::before, .card::after {
+    content: '🎂';
+    position: absolute;
+    font-size: 2rem;
+    animation: spin 4s linear infinite;
+  }
+  .card::before { top: -20px; left: -20px; }
+  .card::after { bottom: -20px; right: -20px; animation-direction: reverse; }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    color: #ff3300;
+    letter-spacing: 4px;
+    text-shadow: 
+      3px 3px 0 #8b0000,
+      6px 6px 0 rgba(255,51,0,0.2);
+    line-height: 1;
+    animation: wobble 3s ease-in-out infinite;
+  }
+
+  @keyframes wobble {
+    0%, 100% { transform: rotate(-1deg); }
+    50% { transform: rotate(1deg); }
+  }
+
+  .subtitle {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: #ffd700;
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+
+  .divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #ff3300, transparent);
+    margin: 24px 0;
+  }
+
+  .section {
+    margin-bottom: 28px;
+    padding: 18px 20px;
+    border-left: 4px solid #ff3300;
+    background: rgba(255,51,0,0.05);
+    border-radius: 0 4px 4px 0;
+    animation: fadeSlide 0.6s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; border-color: #ffd700; background: rgba(255,215,0,0.05); }
+  .section:nth-child(3) { animation-delay: 0.2s; border-color: #7b4fff; background: rgba(123,79,255,0.05); }
+  .section:nth-child(4) { animation-delay: 0.3s; border-color: #00cfff; background: rgba(0,207,255,0.05); }
+  .section:nth-child(5) { animation-delay: 0.4s; border-color: #ff69b4; background: rgba(255,105,180,0.05); }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .section-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .section-tag {
+    font-family: 'Bangers', cursive;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: #ff3300;
+    text-transform: uppercase;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .section:nth-child(2) .section-tag { color: #ffd700; }
+  .section:nth-child(3) .section-tag { color: #7b4fff; }
+  .section:nth-child(4) .section-tag { color: #00cfff; }
+  .section:nth-child(5) .section-tag { color: #ff69b4; }
+
+  .section p {
+    color: #e0e0e0;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  .highlight {
+    color: #ffd700;
+    font-weight: 700;
+  }
+
+  .red { color: #ff3300; font-weight: 700; }
+  .purple { color: #b57bff; font-weight: 700; }
+  .blue { color: #00cfff; font-weight: 700; }
+  .pink { color: #ff69b4; font-weight: 700; }
+
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .big-msg {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  .big-msg span {
+    color: #ff3300;
+    display: inline-block;
+    animation: bounce 0.6s ease infinite alternate;
+  }
+
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-6px); }
+  }
+
+  .confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+  }
+
+  .confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    border-radius: 2px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { top: -20px; transform: rotate(0deg) translateX(0); opacity: 1; }
+    80% { opacity: 1; }
+    100% { top: 110vh; transform: rotate(720deg) translateX(80px); opacity: 0; }
+  }
+
+  .wolf-sound {
+    text-align: center;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    letter-spacing: 2px;
+    margin: 8px 0;
+    animation: roar 1.5s ease-in-out infinite alternate;
+    color: #ff69b4;
+    font-family: 'Bangers', cursive;
+  }
+
+  @keyframes roar {
+    from { transform: scale(1); text-shadow: 0 0 10px rgba(255,105,180,0.3); }
+    to { transform: scale(1.1); text-shadow: 0 0 25px rgba(255,105,180,0.8); }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 FELIZ CUMPLEAÑOS AUGUSTO "TRONCO" 🎉</h1>
-        
-        <div class="mensaje">
-            <p>Querido <span class="destacado">Augusto "Ponla"</span>,</p>
-            
-            <p>Tu puto cumpleaños es tan irrelevante que ni siquiera merece su propio día del calendario, carajo. Es tan insignificante que tenemos que celebrarlo usando los acontecimientos de <strong>MAÑANA</strong>, porque hoy no pasa nada digno de recordar... igual que tu existencia, maricón.</p>
-            
-            <p>Resulta que mañana es el <span class="destacado">Día Internacional de las Mujeres Rurales</span>. ¿Y sabes qué? Eso me recordó a tu amorcito, el Gragas Rural ese que tanto te gusta. Seguro ese gordo peludo te tiene enamorado, ¿no? Se nota que te mueres por ese campesino borracho. Eres más obvio que un semáforo en rojo, compadre.</p>
-            
-            <p>También mañana es el <span class="destacado">Día Internacional de los Pronombres</span>. ¿Cuáles son los tuyos este año, Tronco? ¿Ella/Ella? Porque con esa actitud que cargas, ya todos sospechamos lo mariconcito que andas. No es por joder, pero hasta un ciego se daría cuenta.</p>
-            
-            <p>Y para rematar, mañana también se celebra el <span class="destacado">Día Internacional de la Reconstrucción Mamaria</span>. Che, ¿ya te hiciste las tetas que tanto querías? Con lo maraco que eres, no me sorprendería que ya tuvieras turno programado. "Ponla" más bien debería ser "Póntelas", ¿no?</p>
-            
-            <p>En fin, Augusto, feliz cumpleaños, pedazo de maricón. Que este año te traiga mucha felicidad, mucho Gragas Rural en tu vida, y ojalá encuentres los huevos que perdiste por ahí hace tiempo.</p>
-        </div>
-        
-        <div class="firma">
-            <p>Con cariño (pero siendo honestos),</p>
-            <p>Tus amigos que te quieren... más o menos 😘</p>
-        </div>
+
+<!-- Confetti -->
+<div class="confetti" id="confetti"></div>
+
+<div class="card">
+  <div class="header">
+    <div class="title">¡FELIZ CUMPLE,<br>CAGÓN!</div>
+    <div class="subtitle">aka "Jimmy" Tornazo 🎉</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Intro -->
+  <div class="section">
+    <span class="section-tag">📢 Aviso importante</span>
+    <p>
+      Mirá, <span class="highlight">Jimmy</span>, tu cumpleaños es tan <span class="red">irrelevante</span> que el mundo entero decidió celebrar otras cosas el mismo día. 
+      Así que no, <span class="highlight">la mierda</span> no se detuvo por vos. Pero igual acá estamos, porque somos buenos amigos y te queremos, <span class="red">pedazo de pelotudo</span>.
+    </p>
+  </div>
+
+  <!-- Día del escultor -->
+  <div class="section">
+    <span class="section-icon">🗿</span>
+    <span class="section-tag">Día Internacional del Escultor</span>
+    <p>
+      Hoy se celebra el <span class="highlight">Día Internacional del Escultor</span>. Los escultores toman una piedra sin forma, sin gracia y sin valor... 
+      y la convierten en algo <span class="highlight">hermoso e importante</span>. 
+      Lástima que con vos <span class="red">nadie se tomó ese trabajo</span>, <span class="highlight">Jimmy</span>. Seguís siendo la piedra sin pulir. 
+      <span class="red">Bruto, tosco y lleno de aristas</span>. Feliz cumple igual, boludo. 🗿
+    </p>
+  </div>
+
+  <!-- Día del linfedema -->
+  <div class="section">
+    <span class="section-icon">🏥</span>
+    <span class="section-tag">Día Internacional del Linfedema</span>
+    <p>
+      También es el <span class="purple">Día Internacional del Linfedema</span>, que es básicamente cuando el cuerpo <span class="purple">se hincha de manera patológica</span> y no funciona como debería. 
+      Curiosamente, eso describe perfectamente tu <span class="red">cerebro, Jimmy</span>. 
+      Hinchado, inútil y médicamente inexplicable. <span class="purple">Consultá a un especialista</span>, en serio. 💊
+    </p>
+  </div>
+
+  <!-- Semana contra el racismo -->
+  <div class="section">
+    <span class="section-icon">✊</span>
+    <span class="section-tag">Semana de Solidaridad contra el Racismo</span>
+    <p>
+      Estamos en plena <span class="blue">Semana de Solidaridad con los Pueblos que Luchan contra el Racismo y la Discriminación Racial</span>. 
+      Un mensaje hermoso de igualdad para toda la humanidad... 
+      <span class="red">excepto para vos</span>, <span class="highlight">Jimmy</span>, porque vos sos discriminado por una razón completamente diferente: 
+      <span class="blue">sos un boludo</span> y eso no tiene nada que ver con tu origen. Es mérito propio. Felicitaciones. ✊
+    </p>
+  </div>
+
+  <!-- Therian Warwick -->
+  <div class="section">
+    <span class="section-icon">🐺</span>
+    <span class="section-tag">Therian Alert — Warwick Mode: ON</span>
+    <p>
+      Y para cerrar con broche de oro: sabemos que en el fondo <span class="pink">Jimmy no es del todo humano</span>. 
+      Cada vez que abre el League of Legends y lockea a <span class="highlight">Warwick</span>, algo se despierta en él. 
+      Los <span class="pink">aullidos</span>, los gruñidos guturales, los <span class="red">sonidos de bestia herida</span> que salen de su habitación... 
+      <span class="pink">el therian interior hace su aparición</span>. 
+      Vecinos han llamado al control de fauna. Su familia pensó que tenían un <span class="red">perro con rabia</span>. 
+      No, señores. Era Jimmy en la jungla, husmeando al ADC enemigo. <span class="highlight">🐺 AWOOOOOO 🐺</span>
+    </p>
+  </div>
+
+  <div class="wolf-sound">🐺 AWOOOOOO — HAPPY BIRTHDAY, MUTANTE 🐺</div>
+
+  <hr class="divider">
+
+  <div class="footer">
+    <div class="big-msg">
+      En serio, <span>Jimmy</span>:<br>
+      te queremos un montón,<br>
+      <span>¡feliz cumpleaños, cabrón!</span> 🎂🍺
     </div>
-    
-    <script>
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.animationDelay = Math.random() * 3 + 's';
-            confetti.style.background = ['#ff6b9d', '#c06c84', '#6c5b7b', '#355c7d', '#ffd700'][Math.floor(Math.random() * 5)];
-            document.body.appendChild(confetti);
-        }
-    </script>
+  </div>
+</div>
+
+<script>
+  // Generate confetti
+  const container = document.getElementById('confetti');
+  const colors = ['#ff3300','#ffd700','#7b4fff','#00cfff','#ff69b4','#fff'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.classList.add('confetti-piece');
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (Math.random() * 8 + 6) + 'px';
+    piece.style.height = (Math.random() * 8 + 6) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDuration = (Math.random() * 4 + 3) + 's';
+    piece.style.animationDelay = (Math.random() * 5) + 's';
+    piece.style.opacity = Math.random() * 0.7 + 0.3;
+    container.appendChild(piece);
+  }
+</script>
 </body>
 </html>
